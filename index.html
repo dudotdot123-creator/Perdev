@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Full Profile System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="hero">
+    <h1>Family Full Profile System</h1>
+    <p>Record a person's profile, relationships, children, and parents.</p>
+  </header>
+
+  <main class="container">
+    <div class="warning" role="alert">
+      <strong>Temporary data only:</strong> All information stays temporarily on this page.
+      It is not sent to an online database and will be lost when you refresh or close the page.
+    </div>
+
+    <form id="profileForm">
+      <div id="mainProfile"></div>
+      <div class="actions">
+        <button type="button" id="previewBtn">Show Full Profile</button>
+        <button type="reset" class="secondary">Reset Form</button>
+      </div>
+    </form>
+
+    <section id="previewSection" class="preview hidden" aria-live="polite">
+      <div class="preview-heading">
+        <h2>Full Profile Preview</h2>
+        <button type="button" id="closePreview" class="secondary">Close Preview</button>
+      </div>
+      <pre id="previewContent"></pre>
+    </section>
+  </main>
+
+  <footer>Client-side only · No login · No online database</footer>
+  <script src="script.js"></script>
+</body>
+</html>
