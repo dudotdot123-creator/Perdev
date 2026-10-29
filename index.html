@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Family Genogram Survey System</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="brand-mark" aria-hidden="true">FG</div>
+      <div>
+        <p class="eyebrow">PRIVATE · CLIENT-SIDE ONLY</p>
+        <h1>Family Genogram Survey System</h1>
+        <p class="subtitle">Collect family information and export it locally as a CSV file.</p>
+      </div>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="privacy-banner" aria-label="Privacy notice">
+      <strong>Your data stays in this browser.</strong>
+      <span>No server, account, Google Sheets, or online submission is used. Download your CSV to keep a copy.</span>
+    </section>
+
+    <section class="progress-card" aria-label="Survey progress">
+      <div class="progress-top">
+        <span id="step-label">Step 1</span>
+        <span id="progress-percent">0%</span>
+      </div>
+      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
+    </section>
+
+    <section class="survey-card">
+      <div id="app" aria-live="polite"></div>
+    </section>
+    <p class="footnote">Temporary survey data is held in memory only. Refreshing or closing this page clears unsaved data.</p>
+  </main>
+</body>
+</html>
