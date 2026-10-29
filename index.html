@@ -1,41 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Family Full Profile System</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Family Genogram Survey System</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="hero">
-    <h1>Family Full Profile System</h1>
-    <p>Record a person's profile, relationships, children, and parents.</p>
-  </header>
-
-  <main class="container">
-    <div class="warning" role="alert">
-      <strong>Temporary data only:</strong> All information stays temporarily on this page.
-      It is not sent to an online database and will be lost when you refresh or close the page.
-    </div>
-
-    <form id="profileForm">
-      <div id="mainProfile"></div>
-      <div class="actions">
-        <button type="button" id="previewBtn">Show Full Profile</button>
-        <button type="reset" class="secondary">Reset Form</button>
-      </div>
-    </form>
-
-    <section id="previewSection" class="preview hidden" aria-live="polite">
-      <div class="preview-heading">
-        <h2>Full Profile Preview</h2>
-        <button type="button" id="closePreview" class="secondary">Close Preview</button>
-      </div>
-      <pre id="previewContent"></pre>
-    </section>
-  </main>
-
-  <footer>Client-side only · No login · No online database</footer>
-  <script src="script.js"></script>
-</body>
-</html>
+<header class="site-header"><h1>Family Genogram Survey System</h1><p>Record family members across four generations</p></header>
+<main class="app">
+<aside class="notice"><strong>Temporary data warning:</strong> All information is stored only on this page. It is not uploaded to a server or database and will be lost when you refresh or close the page.</aside>
+<section class="progress-area"><div class="progress-label"><span id="stepLabel">Step 1 of 4</span><span id="percentLabel">25%</span></div><div class="progress-track"><div id="progressBar" class="progress-bar"></div></div></section>
+<form id="surveyForm" novalidate>
+<section class="page active" data-page="0"><h2>Page 1 — Informant</h2><p class="intro">The informant must be a 2nd- or 3rd-generation family member. Grandparents in the 1st generation do not complete the survey themselves.</p><div id="informantFields" class="fields"></div></section>
+<section class="page" data-page="1"><h2>Page 2 — Family member to record</h2><div class="fields"><div class="field"><span class="question-note">Please provide detailed, complete information or select the correct option.</span><label for="generation">Which generation is this recorded family member in?</label><select id="generation" required><option value="">Select generation</option><option>1st generation</option><option>2nd generation</option><option>3rd generation</option><option>4th generation</option><option>Done</option><option>Other (specify)</option></select><input id="generationOther" class="other-input hidden" type="text" placeholder="Specify other generation"></div></div><p class="hint">Choose “Done” when all family members you want to record have been entered.</p></section>
+<section class="page" data-page="2"><h2>Pages 3–9 — Recorded person's profile</h2><p class="life-note"><strong>Life-span clarification:</strong> We are asking about the recorded family member — NOT you, the informant. If deceased, you provide the details.</p><div id="personFields" class="fields"></div><div id="partnerSection" class="subsection hidden"><h3>Partner details</h3><p class="hint">Complete this section for a non-single partner.</p><div id="partnerFields" class="fields"></div></div><div id="extraPartnerSection" class="subsection hidden"><h3>Additional partner</h3><div id="extraPartnerFields" class="fields"></div></div><div id="childrenSection" class="subsection"><h3>Children / pet-children</h3><div id="childrenFields" class="fields"></div><div id="childEntries"></div></div></section>
+<section class="page" data-page="3"><h2>Final — Full profile preview</h2><p class="hint">Review the record before finishing. Use Back to make changes.</p><pre id="preview" class="preview"></pre></section>
+<div class="navigation"><button type="button" id="backBtn" class="secondary">Back</button><span id="navStatus" class="nav-status"></span><button type="button" id="nextBtn">Next</button></div>
+</form><div class="final-actions hidden" id="finalActions"><button type="button" id="recordAnotherBtn">Record Another (keeps informant info)</button><button type="button" id="restartBtn" class="danger">Restart All</button></div>
+</main><footer>Client-side only · No login · No online database</footer><script src="script.js"></script>
+</body></html>
