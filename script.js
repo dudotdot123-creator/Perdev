@@ -1,7 +1,7 @@
 "use strict";
 
 (() => {
-  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbw7WM1mKfTtGcmZBQMgGHdS7acI5Pm6rTpzH47ECnfOiq_7QMqYV1vEPJBFlf31mFcR/exec";
+  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbw4fCCUHJL1t_3RnWCp2Y7s65zRuzl887oF5CT_4H8JAKUX7LxnB6HlhmezAAE-LgKU8A/exec";
   const NOTE = "Please provide detailed, complete information or select the correct option.";
   const LIFE_NOTE = "We are asking about the recorded family member — NOT you, the informant. If deceased, you provide the details.";
 
