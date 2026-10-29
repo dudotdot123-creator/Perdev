@@ -1,6 +1,7 @@
 "use strict";
 
 (() => {
+  const GOOGLE_SHEETS_URL = "https://script.google.com/macros/s/AKfycbw7WM1mKfTtGcmZBQMgGHdS7acI5Pm6rTpzH47ECnfOiq_7QMqYV1vEPJBFlf31mFcR/exec";
   const NOTE = "Please provide detailed, complete information or select the correct option.";
   const LIFE_NOTE = "We are asking about the recorded family member — NOT you, the informant. If deceased, you provide the details.";
 
@@ -213,7 +214,8 @@
       <div class="preview-section"><h3>Full-data preview</h3><div class="preview-box"><pre>${escapeHtml(JSON.stringify(preview, null, 2))}</pre></div></div>
       <div class="warning"><strong>Warning:</strong> All temporary data will be lost if page refreshes. Download the CSV to keep a local copy.</div>
       <div id="form-error" class="error" role="alert" hidden></div>
-      <div class="action-row"><button type="button" class="btn-secondary" id="back-btn">← Back</button><div class="action-right"><button type="button" class="btn-secondary" id="record-another-btn">Record Another Member</button><button type="button" class="btn-danger" id="restart-btn">Restart All</button><button type="button" class="btn-export" id="export-btn">Download as CSV</button></div></div>`;
+      <p id="submission-status" class="inline-help" role="status" aria-live="polite"></p>
+      <div class="action-row"><button type="button" class="btn-secondary" id="back-btn">← Back</button><div class="action-right"><button type="button" class="btn-secondary" id="record-another-btn">Record Another Member</button><button type="button" class="btn-danger" id="restart-btn">Restart All</button><button type="button" class="btn-export" id="submit-google-sheets-btn">Submit to Google Sheets</button><button type="button" class="btn-export" id="export-btn">Download as CSV</button></div></div>`;
   }
 
   function wireControls() {
@@ -223,6 +225,8 @@
     if (nextBtn) nextBtn.addEventListener("click", next);
     const exportBtn = document.getElementById("export-btn");
     if (exportBtn) exportBtn.addEventListener("click", exportCsv);
+    const submitBtn = document.getElementById("submit-google-sheets-btn");
+    if (submitBtn) submitBtn.addEventListener("click", submitToGoogleSheets);
     const recordAnother = document.getElementById("record-another-btn");
     if (recordAnother) recordAnother.addEventListener("click", recordAnotherMember);
     const restart = document.getElementById("restart-btn");
@@ -504,6 +508,55 @@
     state.currentMember = null;
     state.currentChildIndex = 0;
     start();
+  }
+
+
+  async function submitToGoogleSheets() {
+    const button = document.getElementById("submit-google-sheets-btn");
+    const status = document.getElementById("submission-status");
+    const errorBox = document.getElementById("form-error");
+
+    if (!state.informant.fullName || state.members.length === 0) {
+      if (errorBox) {
+        errorBox.hidden = false;
+        errorBox.textContent = "Please enter the informant details and record at least one family member before submitting.";
+      }
+      return;
+    }
+
+    if (button) {
+      button.disabled = true;
+      button.textContent = "Submitting…";
+    }
+    if (status) status.textContent = "Sending your survey to Google Sheets…";
+    if (errorBox) errorBox.hidden = true;
+
+    const payload = {
+      informant: state.informant,
+      records: state.members
+    };
+
+    try {
+      // text/plain avoids a CORS preflight. In no-cors mode, the browser cannot
+      // read the server response, so the spreadsheet must be checked to confirm saving.
+      await fetch(GOOGLE_SHEETS_URL, {
+        method: "POST",
+        mode: "no-cors",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(payload)
+      });
+      if (status) {
+        status.textContent = "Request sent. Please open the Google Sheet and check the SurveySubmissions tab to confirm the rows were saved.";
+      }
+    } catch (error) {
+      console.error("Google Sheets submission failed:", error);
+      if (status) status.textContent = "Could not send the request. Check your internet connection and Apps Script deployment URL, then try again.";
+    } finally {
+      if (button) {
+        button.disabled = false;
+        button.textContent = "Submit to Google Sheets";
+      }
+    }
   }
 
   function csvCell(value) {
