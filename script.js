@@ -31,7 +31,7 @@ const TXT = {
   progress:'Step'
  }
 };
-const WEB_APP_URL='PASTE_YOUR_DEPLOYED_APPS_SCRIPT_WEB_APP_URL_HERE';
+const WEB_APP_URL='https://script.google.com/macros/s/AKfycbx7tLvi0BBmRNTmcv6KAYQFMrwRRdkB7zcpLm3ln6cX-itzraFqu3YO8lNhFo8wBLMq/exec';
 const state={lang:'tl',generation:'',informant:{name:'',age:'',gender:''},members:[],page:0};
 const $=id=>document.getElementById(id);
 function t(k){return TXT[state.lang][k]||k}
