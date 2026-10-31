@@ -1,42 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="tl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Family Genogram Survey System</title>
-  <link rel="stylesheet" href="style.css">
-  <script src="script.js" defer></script>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Family Genogram Survey</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <header class="site-header">
-    <div class="header-inner">
-      <div class="brand-mark" aria-hidden="true">FG</div>
-      <div>
-        <p class="eyebrow">PRIVATE · CLIENT-SIDE ONLY</p>
-        <h1>Family Genogram Survey System</h1>
-        <p class="subtitle">Collect family information and export it locally as a CSV file.</p>
-      </div>
-    </div>
-  </header>
-
-  <main class="container">
-    <section class="privacy-banner" aria-label="Privacy notice">
-      <strong>Your data stays in this browser.</strong>
-      <span>No server, account, Google Sheets, or online submission is used. Download your CSV to keep a copy.</span>
-    </section>
-
-    <section class="progress-card" aria-label="Survey progress">
-      <div class="progress-top">
-        <span id="step-label">Step 1</span>
-        <span id="progress-percent">0%</span>
-      </div>
-      <div class="progress-track"><div id="progress-fill" class="progress-fill"></div></div>
-    </section>
-
-    <section class="survey-card">
-      <div id="app" aria-live="polite"></div>
-    </section>
-    <p class="footnote">Temporary survey data is held in memory only. Refreshing or closing this page clears unsaved data.</p>
-  </main>
-</body>
-</html>
+<header class="top"><div><p class="eyebrow">FAMILY GENOGRAM SURVEY</p><h1 id="siteTitle">Family Genogram Survey System</h1><p id="siteSub">Gabay sa pagkuha ng impormasyon tungkol sa pamilya.</p></div><button id="langBtn" class="outline">English</button></header>
+<main class="wrap">
+<div class="notice" id="privacy">Ilagay lamang ang impormasyong kaya mong ibahagi. Ise-save ito sa Google Sheet kapag pinindot mo ang submit. Maaari ka ring mag-download ng CSV backup.</div>
+<section class="progress"><div><span id="stepLabel">Hakbang 1</span><span id="pct">0%</span></div><div class="bar"><i id="fill"></i></div></section>
+<section class="panel"><div id="app" aria-live="polite"></div></section>
+<p class="muted">Paalala: Huwag maglagay ng sensitibong impormasyon na hindi kailangan sa survey.</p>
+</main>
+<script src="script.js"></script>
+</body></html>
